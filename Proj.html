@@ -1,130 +1,184 @@
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body>
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-
-<div>
-<div>
-	<div>
-		<div>
-			<div>
-				<form method="POST" target="_blank" onsubmit="try {return window.confirm(&quot;You are submitting information to an external page.\nAre you sure?&quot;);} catch (e) {return false;}">	
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Bootstrap Case</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script>
+		// Password Match Function
+		function confirmPass() {
+			var pass = document.getElementById("pass").value
+			var confPass = document.getElementById("c_pass").value
+			if(pass != confPass) {
+				document.getElementById('pass_error').innerHTML='Password not match';
+			}
+		}
+		// Password Specification Function
+		function alphaNumeric(input) {
+			var mypswd = input.value.trim()
+			if (mypswd == "" || mypswd == null) {
+				document.getElementById('special_error').innerHTML = "Please enter password"
+			} 
+			else if (mypswd.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$/)) {
+				document.getElementById('special_error').innerHTML = "strong password"
+			} 
+			else {
+				document.getElementById('special_error').innerHTML = "password should contain ('0-9,a-z,A-Z,Special char')"
+			}
+		}		
+		//Hiding Permanent Addr. Field Function
+		function hidePermanentAddress(check_address) {
+			var addr = document.getElementById("address2");
+			addr.style.display = check_address.checked ? "none" : "block";
+		}
+		// 	Shows Higher Qualifications Description
+		function ShowHideDiv(check_qualification) {
+			var description = document.getElementById("description");
+			description.style.display = check_qualification.checked ? "block" : "none";
+		}
+		// Mobile Validation Function
+		function isNumber(evt) {
+			evt = (evt) ? evt : window.event;
+			var charCode = (evt.which) ? evt.which : evt.keyCode;
+			if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+				alert("Please enter only digits.");
+			}
+		}
+		/*  Pin Validation Function
+		function IsNumericPin(e) {
+            var keyCode = e.which ? e.which : e.keyCode
+            var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
+            document.getElementById('pin_error').style.display = ret ? "none" : "inline";
+            return ret;
+        }*/
+	</script>
+	<style type="text/css">
+       a:hover 
+		{
+			text-decoration:none;
+		}	
+		input[type="password"]{font:small-caption;font-size:16px};
+		input[type="text"]{font:small-caption;font-size:16px};
+    </style>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="Absolute-Center is-Responsive">
+			<div class="col-sm-4 col-md-5 col-md-offset-3">
+				<form action="" method="POST" id="cr">	
 					<h2 align="center">Candidate Register </h2>
 	  
-					<div>
-						<input type="text" name="firstname"> 
-						<span></span>
-						<input type="text" name="lastname">               
+					<div class="form-group input-group">
+						<input class="form-control" type="text" name='firstname' placeholder="First Name" required/> 
+						<span class="input-group-addon"></span>
+						<input  class="form-control" type="text" name='lastname' placeholder="Last Name" required/>               
 					</div>
-					<div>
-						<span><i></i></span>
-						<input type="email" name="email">          
+					<div class="form-group input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+						<input class="form-control " type="email" name='email' placeholder="Email@gmail.com" required/>          
 					</div>
 					
-					<div>
-						<span><i></i></span>
-						<input type="password" name="password" maxlength="20">     
+					<div class="form-group input-group">
+						<span class="input-group-addon "><i class="glyphicon glyphicon-lock"></i></span>
+						<input id="pass" class="form-control" type="password" name='password' maxlength="20" placeholder="Password" onkeyup=" alphaNumeric(this)" required/>     
 					</div>
-					<span style="color:#f00"></span>
+					<span id="special_error" style="color:#F00;"></span>
 	
-					<div>
-						<span><i></i></span>
-						<input type="password" name="password">     
+					<div class="form-group input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+						<input id="c_pass" class="form-control" type="password" name='password' placeholder="Re-Enter Password" onblur="confirmPass()" required/>     
 					</div>
-					<span style="color:#f00"> </span>
+					<span id="pass_error" style="color:#F00;"> </span>
 	
-	
-					<div>
-						<div>
-							<label>Date Of Birth</label>
-							<input type="date" name="dob">
+	<!------------------------------------------ Date Of Birth Select Options ---------------------------------->
+					<div class="row">
+						<div class="form-group col-lg-6">
+							<label for="dateofbirth">Date Of Birth</label>
+							<input class="form-control" type="date" name="dob" required checkbox>
 						</div>
 					</div>
-	
+	<!---------------------------------------------- Gender Radio Butttons ------------------------------>
 					
-					<div>
-						<label>Gender</label>  
-						<label>
+					<div class="form-group">
+						<label for="gender">Gender</label>&nbsp;&nbsp;
+						<label class="radio-inline">
 							<input type="radio" name="optradio" value="male">Male
 						</label>
-						<label>
+						<label class="radio-inline">
 							<input type="radio" name="optradio" value="female">Female
 						</label>
-						<label>
+						<label class="radio-inline">
 							<input type="radio" name="optradio" value="others">Others
 						</label>
 					</div>					
-	
-					<div>
-						<label>Current Address </label>
-						<input type="text">
+	<!------------------------------------------------------------ Address Fields ----------------------------------------->
+					<div class="form-group">
+						<label for="address">Current Address </label>
+						<input class="form-control" id="address1" type="text" placeholder="Enter Street Address" required="">
 					</div>
-					<label>
-						<input type="checkbox">Select If Permanent Addr. As Same As Current Addr.
-					</label><br>						
-					<div>									
-						<input type="text">
-					</div><br>				
-					<div>
-						<div>
-							<label>City</label>
-							<input type="text">
+					<label for="checkbox_address">
+						<input type="checkbox" id="check_addr" placeholder="Enter Permanent Address" onclick="hidePermanentAddress(this)" />Select If Permanent Addr. As Same As Current Addr.
+					</label><br/>						
+					<div id="address2" class="form-group">									
+						<input class="form-control" type="text" placeholder="Enter Permanent Address" required>
+					</div><br/>				
+					<div class="row">
+						<div class="form-group col-lg-6">
+							<label for="city">City</label>
+							<input type="text" class="form-control" palceholder="Enter City" required=""/>
 						</div>
-						<div>
-							<label>State/ Province</label>
-							<input type="text">
+						<div class="form-group col-lg-6">
+							<label for="state">State/ Province</label>
+							<input type="text" class="form-control" palceholder="Enter State/ Province" required=""/>
 						</div>
 					</div>
-					<div>
-						<div>
-							<label>Mobile No.</label>
-							<input type="text" maxlength="10">
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="city">Mobile No.</label>
+							<input type="text" id="mobile" class="form-control" placeholder="Enter 10 Digit No." maxlength="10" onkeypress=" isNumber(event);"  required/>
 							
-						</div>  
-						<div>
-							<label>Pincode</label>
-							<input type="text" maxlength="6">														
+						</div>&nbsp; 
+						<div class="form-group col-md-4">
+							<label for="city">Pincode</label>
+							<input type="text" id="pin" class="form-control" placeholder="Enter PIN" maxlength="6" onkeypress="isNumber(event);"required/>														
 						</div> 						
 					</div>
-					
+					<!----------------- Education Qualification----------------------->
 	
 					<div> 						
-						<div><strong>Education Qualifications :</strong><br><br>
-						
-							<div>
-								<div>
-									<h4>
-										<button type="button" href="#0.1_tenth">10<sup>th</sup>Class</button>
+						<div id="qualification"><strong>Education Qualifications :</strong><br><br>
+						<!------------------------10th---------------------------->
+							<div class="panel-group" id="accordion">
+								<div class="panel panel-default">
+									<h4 class="panel-title">
+										<button type="button" class="btn btn-primary" data-toggle="collapse" data-parent="#accordion" href="#tenth">10<sup>th</sup>Class</button>
 									</h4>
 								
-									<div>
-										<div>
-											<div>
-												<input type="text">
+									<div id="tenth" class="panel-collapse collapse ">
+										<div class="panel-body">
+											<div class="form-group">
+												<input class="form-control" type="text" placeholder="Address Of The School">
 											</div>
-											<div>
-												<div>
-													<select>
+											<div class="row">
+												<div class="col-xs-4">
+													<select class="form-control">
 														<option>Year Of Passed</option>
 														<option>2014-15</option>
 														<option>2013-14</option>
 														<option>2015-16</option>	
 													</select>
 												</div>
-												<div>
-													
-														<input type="text" maxlength="2">
+												<div class="form-group col-lg-3">
+													<!--<input type="text" class="form-control" maxlength="2" placeholder="Percentile" />				-->
+														<input type="text" class="form-control" placeholder="Percentile" maxlength="2" onkeypress=" isNumber(event);"  required/>
 												</div>
-												<div>
-													<select>
+												<div class="col-xs-3">
+													<select class="form-control">
 														<option>SSC</option>
 														<option>ABC</option>
 														<option>DEF</option>
@@ -134,42 +188,42 @@
 										</div>
 									</div>
 								</div>
-						
-								<div>
-									<h4>
-										<button type="button" href="#0.1_inter">12<sup>th</sup>Class</button>
+						<!---------------Intermediate-------------------------------------------------------------------------------------->
+								<div class="panel panel-default">
+									<h4 class="panel-title">
+										<button type="button" class="btn btn-primary" data-toggle="collapse" data-parent="#accordion" href="#inter">12<sup>th</sup>Class</button>
 									</h4>	
-									<div>
-										<div>
-											<div>
-												<input type="text">
+									<div id="inter" class="panel-collapse collapse">
+										<div class="panel-body">
+											<div class="form-group">
+												<input class="form-control"  type="text" placeholder="Location Of The College">
 											</div>
-											<div>
-												<div>
-													<select>
+											<div class="row">
+												<div class="col-xs-4">
+													<select class="form-control">
 														<option>Year Of Passed</option>
 														<option>2013-15</option>
 														<option>2014-16</option>
 														<option>2015-17</option>
 													</select>
 												</div>
-												<div>
-													<input type="text" maxlength="2">
+												<div class="form-group col-lg-6">
+													<input type="text" class="form-control" placeholder="Percentile" maxlength="2" onkeypress=" isNumber(event);"  required/>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>	
-						
-								<div>
-									<h4>
-										<button type="button" href="#0.1_ug">UG Courses</button>
+						<!----------------------------------------Professional Courses------------------------------------------------------------------------------------------>
+								<div class="panel panel-default">
+									<h4 class="panel-title">
+										<button type="button" class="btn btn-primary" data-toggle="collapse" data-parent="#accordion" href="#ug">UG Courses</button>
 									</h4>
-									<div>
-										<div>
-											<div>
+									<div id="ug" class="panel-collapse collapse">
+										<div class="panel-body">
+											<div class="row">
 												<div>
-													<select>
+													<select class="form-control">
 														<option>Choose Name Of The College</option>
 														<option>Vishnu Institute Of Technology</option>
 														<option>Shri Vishnu Engineering College For Womens</option>
@@ -177,7 +231,7 @@
 													</select>
 												</div><br>
 												<div>
-													<select>
+													<select class="form-control">
 														<option>Choose Degree</option>
 														<option>B.Tech/B.E</option>
 														<option>M.Tech/M.E</option>
@@ -185,24 +239,24 @@
 												</div>
 												<br>
 												<div>
-													<select>
-														<option>---------------Branch Specialization----------------<wbr>--</option>
+													<select class="form-control">
+														<option>---------------Branch Specialization------------------</option>
 														<option>Computer Science And Engineering</option>
 														<option>Computer Science</option>
 														<option>Electrical And Electronic Engineering</option>
 													</select>	
 												</div>
 												<br>
-												<div>
-													<select>
+												<div class="col-xs-4">
+													<select class="form-control">
 														<option>Year Passed Outs</option>
 														<option>2017</option>
 														<option>2016</option>
 														<option>2015</option>
 													</select>
 												</div>
-												<div>
-													<input type="text" maxlength="2">
+												<div class="form-group col-lg-3">
+													<input type="text" class="form-control" placeholder="Percentile" maxlength="2" onkeypress=" isNumber(event);"  required/>
 												</div>
 											</div> 	
 										</div>
@@ -210,17 +264,17 @@
 								</div>
 							</div>
 							<br>
-							<label>
-								<input type="checkbox">Select For Additional Courses If You Have Done							
+							<label for="check_qualification">
+								<input type="checkbox" id="check_courses" onclick="ShowHideDiv(this)" />Select For Additional Courses If You Have Done							
 							</label>								
-							<div style="display:none">									
-								<textarea rows="8" cols="50"></textarea>
+							<div id="description" style="display: none">									
+								<textarea rows="8" cols="50" placeholder="Specifiy Course Details, aggregate etc"></textarea>
 							</div>							
 						</div>
 					</div>  		
-					<br>  
+					<br><!------------end of Qualification-------------------->  
 					<center>			
-						<input type="submit" value="Submit">
+						<input type="submit" class="btn btn-primary btn-lg" id="f" value="Submit" />
 					</center>
 				</form>        
 			</div>  
@@ -231,5 +285,5 @@
   
 
 
-</div>
-</body></html>
+</body>
+</html>
