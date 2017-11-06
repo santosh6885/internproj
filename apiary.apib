@@ -1,0 +1,73 @@
+FORMAT: 1A
+HOST:  /api/v1/user
+
+# santosh13
+
+signup is a simple API allowing Users to signup to gogetr app
+
+## signup [/signup]
+
+
+
+### Allow User to signup [POST]
+
+Allow the user to signup with his/her information
+
++ Request (application/json)
+
+       
+
++ Response 201 (application/json)
+
+
+
+    + Body
+
+            {
+                "id":"",
+                "firstName":"sai",
+                "lastName":"devabakthini",
+                "dob":" ",
+                "gender":"female",
+                 "phoneNumbers":"123456",
+                 "email":"sai@gmail.com",
+                 "passwordHash":"anjali",
+                 "passwordSalt":" ",
+                 "profilePicId":" ",
+                 "profileBackgroundId":" ",
+                 "status":"pendingVerification",
+                 "createdTimestamp":" ",
+                 "updatedTimestamp":" ",
+                 "userRoles":" "
+
+            }
+            
+            
+            
+## Questions Collection [/answers]
+
+### List All Questions [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "question": "Favourite programming language?",
+                "published_at": "2015-08-05T08:40:51.620Z",
+                "choices": [
+                    {
+                        "choice": "Swift",
+                        "votes": 2048
+                    }, {
+                        "choice": "Python",
+                        "votes": 1024
+                    }, {
+                        "choice": "Objective-C",
+                        "votes": 512
+                    }, {
+                        "choice": "Ruby",
+                        "votes": 256
+                    }
+                ]
+            }
+        ]
